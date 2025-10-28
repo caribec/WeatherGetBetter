@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		827D2ADD2EB0636700BE414B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 827D2ADB2EB0636000BE414B /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		827D2AC42EB0631600BE414B /* WeatherGetBetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherGetBetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		827D2ADB2EB0636000BE414B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		827D2ABB2EB0631600BE414B = {
 			isa = PBXGroup;
 			children = (
+				827D2ADB2EB0636000BE414B /* .gitignore */,
 				827D2AC62EB0631600BE414B /* WeatherGetBetter */,
 				827D2AC52EB0631600BE414B /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				827D2ADD2EB0636700BE414B /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
