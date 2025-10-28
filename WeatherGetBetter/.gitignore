@@ -1,0 +1,17 @@
+
+WeatherGetBetter/
+  WeatherGetBetter.swift
+  Models/
+  Networking/
+  Features/
+    Home/
+    Search/
+    Favorites/
+    Forecast/
+  Resources/
+    Assets.xcassets
+    LaunchScreen.storyboard
+  Support/
+    Constants.swift
+    WeatherDefaultsStore.swift
+  Tests/
