@@ -11,6 +11,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var searchString: String = ""
+    @State private var showingFavorites = false
     
     var body: some View {
         ZStack {
@@ -18,27 +19,14 @@ struct HomeView: View {
 
             ScrollView {
                 VStack(spacing: 20) {
+                    // Title (Helvetica Neue) aligned with search field's left edge
                     Text("WeatherGetBetter")
-                        .font(.title)
-                        .bold()
-                        .padding()
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Palette.accentPrimaryBackground.opacity(0.9),
-                                    Palette.accentSecondaryBackground.opacity(0.9)
-                                ],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .clipShape(RoundedRectangle(cornerRadius: 18))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 18)
-                                    .stroke(.black.opacity(0.25), lineWidth: 1)
-                            )
-                            .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
-                        )
-
+                        .font(.custom("Helvetica Neue", size: 35))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 4)
+                    
 
                     HStack {
                         
@@ -72,7 +60,31 @@ struct HomeView: View {
                         }
                         .padding(.trailing)
                     }
-
+                    // NEW: Go to Favorites button
+                            Button {
+                                showingFavorites = true
+                            } label: {
+                                Label("Go to Favorites", systemImage: "heart.fill")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(.black)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 12)
+                                    .background(
+                                        Capsule()
+                                            .fill(
+                                                LinearGradient(
+                                                    colors: [
+                                                        Palette.accentPrimaryBackground.opacity(0.95),
+                                                        Palette.accentSecondaryBackground.opacity(0.95)
+                                                    ],
+                                                    startPoint: .top, endPoint: .bottom
+                                                )
+                                            )
+                                            .overlay(Capsule().stroke(.black.opacity(0.2), lineWidth: 1))
+                                            .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
+                                    )
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
 
                     GlancePanelView()
                         .padding()
@@ -100,12 +112,37 @@ struct HomeView: View {
 
                         .frame(maxWidth: 300)
                 }
-                .padding(.top, 24)
-                .padding(.bottom, 50)
+                // Shared horizontal padding keeps title and search perfectly aligned
+                 .padding(.horizontal, 18)
+                 .padding(.top, 24)
+                 .padding(.bottom, 50)
             }
         }
+        .sheet(isPresented: $showingFavorites) {
+            FavoritesSheet()
+                .presentationDetents([.medium, .large])
+        }
     }
+}
 
+// Simple favorites sheet showing Houston with a red heart
+struct FavoritesSheet: View {
+    var body: some View {
+        NavigationStack {
+            List {
+                HStack(spacing: 12) {
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(.red)
+                    Text("Houston, TX")
+                        .font(.system(size: 18, weight: .medium))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .navigationTitle("Favorites")
+        }
+    }
 }
 
 #Preview {

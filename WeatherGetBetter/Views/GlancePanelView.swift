@@ -17,13 +17,19 @@ struct GlancePanelView: View {
             }
             
             HStack {
-                VStack {
-                    Text("75°F")
-                        .bold()
-                        .font(.system(size: 64))
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(alignment: .firstTextBaseline, spacing: 3) {
+                        Text("75")
+                            .font(.system(size: 64, weight: .bold))
+                        Text("°F")
+                            .font(.system(size: 28, weight: .semibold)) // smaller unit
+                            .baselineOffset(30) // nudge up so it sits nicely
+                    }
+
                     Text("H: 78° - L: 70°")
+                        .font(.system(size: 16, weight: .medium))
                 }
-                
+
                 Image(systemName: "sun.max.fill")
                     .resizable()
                     .shadow(radius: 2)

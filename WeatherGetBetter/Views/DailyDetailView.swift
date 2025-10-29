@@ -29,23 +29,18 @@ struct DailyDetailView: View {
                     // Title pill
                     HStack(spacing: 10) {
                         Image(systemName: "calendar")
-                            .font(.system(size: 22, weight: .semibold))
+                            .font(.system(size: 30, weight: .semibold))
                             .foregroundColor(.black.opacity(0.85))
                         Text("5 Day Forecast")
-                            .font(.system(size: 28, weight: .black))
+                            .font(.custom("Helvetica Neue", size: 35))
+                            .fontWeight(.bold)
                             .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 4)
                     }
                     .padding(.vertical, 14)
                     .frame(maxWidth: .infinity)
-                    .background(
-                        LinearGradient(
-                            colors: [Palette.accentPrimaryBackground, Palette.accentSecondaryBackground],
-                            startPoint: .top, endPoint: .bottom
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 18))
-                        .overlay(RoundedRectangle(cornerRadius: 18).stroke(.black.opacity(0.25), lineWidth: 1))
-                        .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
-                    )
+
 
                     // Search + Gear row
                     HStack(spacing: 12) {

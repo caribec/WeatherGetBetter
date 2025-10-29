@@ -21,23 +21,17 @@ struct HourlyDetailView: View {
                     // Title pill
                     HStack(spacing: 10) {
                         Image(systemName: "clock")
-                            .font(.system(size: 22, weight: .semibold))
+                            .font(.system(size: 30, weight: .semibold))
                             .foregroundColor(.black.opacity(0.85))
                         Text("Hourly Forecast")
-                            .font(.system(size: 28, weight: .black))
+                            .font(.custom("Helvetica Neue", size: 35))
+                            .fontWeight(.heavy)
                             .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 4)
+                        
                     }
-                    .padding(.vertical, 14)
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        LinearGradient(
-                            colors: [Palette.accentPrimaryBackground, Palette.accentSecondaryBackground],
-                            startPoint: .top, endPoint: .bottom
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 18))
-                        .overlay(RoundedRectangle(cornerRadius: 18).stroke(.black.opacity(0.25), lineWidth: 1))
-                        .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
-                    )
+
 
                     // Search + Gear row
                     HStack(spacing: 12) {
