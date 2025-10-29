@@ -1,6 +1,5 @@
 WeatherGetBetter/
   WeatherGetBetter.swift
-  Models/
   Networking/
   Features/
     Home/
