@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var searchString: String = ""
+    
     var body: some View {
-        Text("Home Screen")
+        VStack() {
+            Text("WeatherGetBetter")
+            //TextField($searchString)
+        }
     }
 }
 
