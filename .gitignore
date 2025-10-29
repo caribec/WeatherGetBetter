@@ -7,7 +7,6 @@ WeatherGetBetter/
     Favorites/
     Forecast/
   Resources/
-    Assets.xcassets
     LaunchScreen.storyboard
   Support/
     Constants.swift

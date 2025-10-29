@@ -11,6 +11,8 @@ import SwiftUI
 struct Palette {
     static let accentPrimary   = Color("AccentPrimary")     // #74BDE5
     static let accentSecondary = Color("AccentSecondary")   // #06528D
+    static let accentPrimaryBackground   = Color("AccentPrimaryBackground")
+       static let accentSecondaryBackground = Color("AccentSecondaryBackground")
 }
 
 struct AppBackground: View {
