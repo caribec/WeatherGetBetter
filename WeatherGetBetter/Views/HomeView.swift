@@ -15,17 +15,34 @@ struct HomeView: View {
     var body: some View {
         VStack() {
             Text("WeatherGetBetter")
+                .font(.title)
+                .bold()
+                .padding()
+                .background(
+                    RoundedGradientBackground()
+                )
+
             HStack() {
+                
                 TextField("", text: $searchString)
                     .textFieldStyle(.roundedBorder)
+                    .clipShape(.capsule)
+                    .shadow(radius: 4)
                     .padding()
+                
                 Button {
                     
                 } label: {
                     Image(systemName: "gearshape")
                         .resizable()
-                        .frame(width: 25, height: 25)
+                        .frame(width: 40, height: 40)
                         .foregroundColor(.black)
+                        .padding(8)
+                        .background() {
+                            Circle()
+                                .fill(Color.white)
+                                .shadow(radius: 4)
+                        }
                 }
                 .padding()
             }
@@ -37,19 +54,11 @@ struct HomeView: View {
                 .italic()
                 .frame(width: 275)
                 .padding()
-                .background() {
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.black, lineWidth: 2)
-                        .fill(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.gray.opacity(0.1), Color.gray.opacity(0.4)]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                        )
-                        .shadow(radius: 10)
-                        .frame(width: 300, height: 100)
-                }
+                .background(
+                    RoundedGradientBackground()
+                )
+                
+                
         }
     }
 }
