@@ -23,7 +23,7 @@ struct GlancePanelView: View {
                             .font(.system(size: 64, weight: .bold))
                         Text("°F")
                             .font(.system(size: 28, weight: .semibold)) // smaller unit
-                            .baselineOffset(30) // nudge up so it sits nicely
+                            .baselineOffset(30) // nudge it up
                     }
 
                     Text("H: 78° - L: 70°")

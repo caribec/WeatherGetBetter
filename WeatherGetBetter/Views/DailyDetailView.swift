@@ -43,29 +43,32 @@ struct DailyDetailView: View {
 
 
                     // Search + Gear row
+ 
                     HStack(spacing: 12) {
+                        // Non-functional search bar 
                         HStack(spacing: 8) {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.red)
-                            TextField("Houston, TX", text: $query)
-                                .textInputAutocapitalization(.never)
-                                .disableAutocorrection(true)
-                            Button {} label: {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.black)
-                            }
+                            Text("Houston")
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
                         }
+                        .padding(.vertical, 10)
                         .padding(.horizontal, 14)
-                        .frame(height: 44)
                         .background(
-                            LinearGradient(
-                                colors: [Palette.accentPrimaryBackground, Palette.accentSecondaryBackground],
-                                startPoint: .top, endPoint: .bottom
-                            )
-                            .clipShape(Capsule())
-                            .overlay(Capsule().stroke(.black.opacity(0.25), lineWidth: 1))
-                            .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
+                            RoundedRectangle(cornerRadius: 22)
+                                .fill(Color(.systemBackground).opacity(0.9))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 22)
+                                        .stroke(.black.opacity(0.15), lineWidth: 1)
+                                )
+                                .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
                         )
+                        .padding(.horizontal)
+
+
 
                         // Gear button styled
                         NavigationLink(destination: SettingsView()) {

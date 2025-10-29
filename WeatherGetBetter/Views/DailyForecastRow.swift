@@ -37,6 +37,7 @@ struct DayForecastRow: View {
                     Text("°F")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.black.opacity(0.8))
+                        .baselineOffset(18) 
                 }
             }
             .frame(width: leftClusterWidth, alignment: .leading)

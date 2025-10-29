@@ -30,11 +30,28 @@ struct HomeView: View {
 
                     HStack {
                         
-                        TextField("Search a city...", text: $searchString)
-                            .textFieldStyle(.roundedBorder)
-                            .clipShape(Capsule())
-                            .shadow(radius: 4)
-                            .padding(.horizontal)
+                        // Non-functional search bar (visual only)
+                        HStack(spacing: 8) {
+                            Image(systemName: "mappin.and.ellipse")
+                                .foregroundColor(.red)
+                            Text("Houston")
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 14)
+                        .background(
+                            RoundedRectangle(cornerRadius: 22)
+                                .fill(Color(.systemBackground).opacity(0.9))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 22)
+                                        .stroke(.black.opacity(0.15), lineWidth: 1)
+                                )
+                                .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
+                        )
+                        .padding(.horizontal)
 
                         NavigationLink(destination: SettingsView()) {
                             Image(systemName: "gearshape.fill")
@@ -60,7 +77,7 @@ struct HomeView: View {
                         }
                         .padding(.trailing)
                     }
-                    // NEW: Go to Favorites button
+                    // Go to Favorites button
                             Button {
                                 showingFavorites = true
                             } label: {
