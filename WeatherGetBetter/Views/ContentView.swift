@@ -21,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             TabView {
-                HomeView()
+                EmptyHomeView()
                     .tabItem {
                         Image(systemName: "house")
                             .foregroundStyle(Color.black)

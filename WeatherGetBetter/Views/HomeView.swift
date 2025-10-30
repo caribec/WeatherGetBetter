@@ -7,6 +7,122 @@
 
 import SwiftUI
 
+//for the purposes of the beta, the empty and regular home views are different but in the beta they will be the same with different content depending on if there is a location searched
+struct EmptyHomeView: View {
+    @State private var searchString: String = ""
+    @State private var showingFavorites = false
+    var body: some View {
+        ZStack {
+            AppBackground()
+            ScrollView {
+                VStack(spacing: 20) {
+                    
+                    Text("WeatherGetBetter")
+                        .font(.custom("Helvetica Neue", size: 35))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 4)
+                    
+                    
+                    HStack {
+                        
+                        NavigationLink(destination: HomeView()
+                            .navigationBarBackButtonHidden(true)) {
+                            TextField("Search a city...", text: $searchString)
+                                .textFieldStyle(.roundedBorder)
+                                .foregroundColor(.black)
+                                .clipShape(Capsule())
+                                .shadow(radius: 4)
+                                .padding(.horizontal)
+                                .disabled(true) //disabled for the purposes of beta
+                        }
+                        
+                        NavigationLink(destination: SettingsView()) {
+                            Image(systemName: "gearshape.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(.black) // matches SettingsView icons
+                                .padding(12)
+                                .background(
+                                    LinearGradient(
+                                        colors: [
+                                            Palette.accentPrimaryBackground.opacity(0.9),
+                                            Palette.accentSecondaryBackground.opacity(0.9)
+                                        ],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle()
+                                            .stroke(.black.opacity(0.25), lineWidth: 1)
+                                    )
+                                    .shadow(color: .black.opacity(0.25), radius: 6, y: 4)
+                                )
+                        }
+                        .padding(.trailing)
+                    }
+                    
+                    Button {
+                        showingFavorites = true
+                    } label: {
+                        Label("Go to Favorites", systemImage: "heart.fill")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(
+                                Capsule()
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [
+                                                Palette.accentPrimaryBackground.opacity(0.95),
+                                                Palette.accentSecondaryBackground.opacity(0.95)
+                                            ],
+                                            startPoint: .top, endPoint: .bottom
+                                        )
+                                    )
+                                    .overlay(Capsule().stroke(.black.opacity(0.2), lineWidth: 1))
+                                    .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
+                            )
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("No location selected. Please search a city above or select a favorite city in the \"Go to Favorites\"")
+                        .italic()
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                        .background(
+                            LinearGradient(
+                                colors: [
+                                    Palette.accentPrimaryBackground.opacity(0.9),
+                                    Palette.accentSecondaryBackground.opacity(0.9)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 18))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 18)
+                                    .stroke(.black.opacity(0.25), lineWidth: 1)
+                            )
+                            .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
+                        )
+
+                        .frame(maxWidth: 300)
+                    
+                }
+                .padding(.horizontal, 18)
+                .padding(.top, 24)
+                .padding(.bottom, 50)
+            }
+        }
+    }
+}
+
+#Preview {
+    EmptyHomeView()
+}
 
 
 struct HomeView: View {
