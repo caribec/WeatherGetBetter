@@ -9,69 +9,79 @@ import SwiftUI
 
 struct GlancePanelView: View {
     var body: some View {
+        VStack(spacing: 16) {
             
-        VStack() {
-            
-            HStack() {
+            HStack {
                 Text("Friday")
                 Text("12:30 pm")
             }
             
-            HStack() {
-                VStack() {
-                    Text("75°F")
-                        .bold()
-                        .font(.system(size: 64))
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(alignment: .firstTextBaseline, spacing: 3) {
+                        Text("75")
+                            .font(.system(size: 64, weight: .bold))
+                        Text("°F")
+                            .font(.system(size: 28, weight: .semibold)) // smaller unit
+                            .baselineOffset(30) // nudge it up
+                    }
+
                     Text("H: 78° - L: 70°")
-                    
+                        .font(.system(size: 16, weight: .medium))
                 }
+
                 Image(systemName: "sun.max.fill")
                     .resizable()
                     .shadow(radius: 2)
                     .frame(width: 100, height: 100)
-                    .foregroundColor(Color.yellow)
-                    .padding()
-                
+                    .foregroundColor(.yellow)
+                    .padding(.leading, 16)
             }
-            .padding()
+            .padding(.bottom, 8)
             
-            HStack() {
-                VStack() {
+            HStack(spacing: 30) {
+                VStack {
                     Image(systemName: "wind")
-                        .resizable()
-                        .frame(width: 50, height: 50)
+                        .font(.system(size: 32))
                     Text("7 mph")
                         .font(.caption)
                 }
-                .padding(.horizontal)
-                VStack() {
-                    Image(systemName: "cloud.rain")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                    Text("7 mph")
-                        .font(.caption)
-                }
-                .padding(.horizontal)
-                VStack() {
-                    Image(systemName: "humidity")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                    Text("7 mph")
-                        .font(.caption)
-                }
-                .padding(.horizontal)
-            }
-            
-        }
-        
-        
-        .padding()
-        .background(
-            RoundedGradientBackground()
-        )
                 
+                VStack {
+                    Image(systemName: "cloud.rain")
+                        .font(.system(size: 32))
+                    Text("15%")
+                        .font(.caption)
+                }
+                
+                VStack {
+                    Image(systemName: "humidity")
+                        .font(.system(size: 32))
+                    Text("65%")
+                        .font(.caption)
+                }
+            }
+        }
+        .padding(24)
+        .background(
+            LinearGradient(
+                colors: [
+                    Palette.accentPrimaryBackground.opacity(0.9),
+                    Palette.accentSecondaryBackground.opacity(0.9)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .overlay(
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(.black.opacity(0.25), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.35), radius: 10, y: 6)
+        )
     }
 }
+
 
 #Preview {
     GlancePanelView()

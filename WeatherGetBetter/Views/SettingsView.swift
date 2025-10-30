@@ -2,7 +2,6 @@
 //  SettingsView.swift
 //  WeatherGetBetter
 //
-//  Created by Alejandro Galvez on 10/28/25.
 //  Created by Carissa Becerra on 10/28/25.
 //
 
@@ -21,25 +20,13 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     // Title pill
                     Text("Settings")
-                        .font(.system(size: 28, weight: .black))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Palette.accentPrimaryBackground,
-                                    Palette.accentSecondaryBackground
-                                ],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .clipShape(RoundedRectangle(cornerRadius: 18))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 18)
-                                    .stroke(.black.opacity(0.25), lineWidth: 1)
-                            )
-                            .shadow(color: .black.opacity(0.25), radius: 8, y: 4)
-                        )
+                        .font(.custom("Helvetica Neue", size: 35))
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 4)
+
+
                     // Toggle card
                     HStack {
                         Text("Toggle Imperial/Metric")
@@ -151,5 +138,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    NavigationStack { SettingsView() }
 }
+
