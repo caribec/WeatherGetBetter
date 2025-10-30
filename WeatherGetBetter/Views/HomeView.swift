@@ -56,52 +56,36 @@ struct HomeView: View {
                         NavigationLink(destination: SettingsView()) {
                             Image(systemName: "gearshape.fill")
                                 .font(.system(size: 24))
-                                .foregroundColor(.black) // matches SettingsView icons
+                                .foregroundColor(.black) 
                                 .padding(12)
                                 .background(
-                                    LinearGradient(
-                                        colors: [
-                                            Palette.accentPrimaryBackground.opacity(0.9),
-                                            Palette.accentSecondaryBackground.opacity(0.9)
-                                        ],
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
-                                    .clipShape(Circle())
-                                    .overlay(
-                                        Circle()
-                                            .stroke(.black.opacity(0.25), lineWidth: 1)
-                                    )
-                                    .shadow(color: .black.opacity(0.25), radius: 6, y: 4)
+                                    Circle()
+                                        .fill(Color("Buttons"))
+                                        .overlay(Circle().stroke(.black.opacity(0.15), lineWidth: 1))
+                                        .shadow(color: .black.opacity(0.25), radius: 6, y: 4)
                                 )
                         }
                         .padding(.trailing)
+
                     }
                     // Go to Favorites button
-                            Button {
-                                showingFavorites = true
-                            } label: {
-                                Label("Go to Favorites", systemImage: "heart.fill")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 12)
-                                    .background(
-                                        Capsule()
-                                            .fill(
-                                                LinearGradient(
-                                                    colors: [
-                                                        Palette.accentPrimaryBackground.opacity(0.95),
-                                                        Palette.accentSecondaryBackground.opacity(0.95)
-                                                    ],
-                                                    startPoint: .top, endPoint: .bottom
-                                                )
-                                            )
-                                            .overlay(Capsule().stroke(.black.opacity(0.2), lineWidth: 1))
-                                            .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
-                                    )
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    Button {
+                        showingFavorites = true
+                    } label: {
+                        Label("Go to Favorites", systemImage: "heart.fill")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(
+                                Capsule()
+                                    .fill(Color("Buttons")) // Asset color
+                                    .overlay(Capsule().stroke(.black.opacity(0.15), lineWidth: 1))
+                                    .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
+                            )
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
 
                     GlancePanelView()
                         .padding()
