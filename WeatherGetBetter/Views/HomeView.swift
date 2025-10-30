@@ -11,13 +11,10 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var searchString: String = ""
+    @State private var showingFavorites = false
+    @State private var isShowingSearch = false
     
     var body: some View {
-        VStack() {
-            Text("WeatherGetBetter")
-                .font(.title)
-                .bold()
-                .padding()
         ZStack {
             AppBackground()  
 
@@ -131,22 +128,23 @@ struct HomeView: View {
                 .presentationDetents([.medium, .large])
         }
     }
+}
+
+struct FavoritesSheet: View {
+    var body: some View {
+        NavigationStack {
+            List {
+                HStack(spacing: 12) {
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(.red)
+                    Text("Houston, TX")
+                        .font(.system(size: 18, weight: .medium))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.secondary)
                 }
-                .padding()
             }
-            
-            GlancePanelView()
-                .padding()
-            
-            Text("Today is a great day to be productive or relax! Be sure to wear sunscreen and drink water if you plan to be out for a while.")
-                .italic()
-                .frame(width: 275)
-                .padding()
-                .background(
-                    RoundedGradientBackground()
-                )
-                
-                
+            .navigationTitle("Favorites")
         }
     }
 }
