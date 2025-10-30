@@ -150,8 +150,5 @@ struct FavoritesSheet: View {
 }
 
 #Preview {
-    NavigationStack {
-        HomeView()
-    }
+    HomeView()
 }
-
