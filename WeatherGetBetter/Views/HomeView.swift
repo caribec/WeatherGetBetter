@@ -56,7 +56,7 @@ struct HomeView: View {
                         NavigationLink(destination: SettingsView()) {
                             Image(systemName: "gearshape.fill")
                                 .font(.system(size: 24))
-                                .foregroundColor(.black) 
+                                .foregroundColor(.black)
                                 .padding(12)
                                 .background(
                                     Circle()
