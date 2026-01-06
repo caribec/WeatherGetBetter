@@ -91,14 +91,15 @@ No API keys are required.
 
 ---
 
-## 👩‍💻 Author
+## 👩‍💻 Authors
 
-**Carissa Becerra**
-Computer Science Graduate – Software Design
+**Carissa Becerra**\
+Computer Science Graduate – Software Design\
 University of Houston
-
-**Alejandro Galvez**
-Computer Science Graduate
+\
+\
+**Alejandro Galvez**\
+Computer Science Graduate\
 University of Houston
 
 ---
