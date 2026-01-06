@@ -78,8 +78,6 @@ No API keys are required.
 
 * Dynamic background based on weather or time of day
 * Weather alerts and notifications
-* Unit customization (metric/imperial)
-* Offline caching
 
 ---
 
