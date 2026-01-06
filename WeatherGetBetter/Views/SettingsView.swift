@@ -9,13 +9,15 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var useImperial = true
+
+    // Shared persistent setting
+    @AppStorage("useImperial") private var useImperial: Bool = true
 
     var body: some View {
         ZStack {
             AppBackground()
- 
-            // Scrollable content only
+
+            // Scrollable
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     // Title pill
@@ -26,19 +28,17 @@ struct SettingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 4)
 
-
                     // Toggle card
                     HStack {
                         Text("Toggle Imperial/Metric")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(.primary)
-                           
 
                         Spacer()
-                        
+
                         Toggle("", isOn: $useImperial)
                             .labelsHidden()
-                        //makes it green when on
+                            //makes it green when on
                             .tint(.green)
                     }
                     .padding(.horizontal, 16)
@@ -47,7 +47,7 @@ struct SettingsView: View {
                         LinearGradient(
                             colors: [
                                 Palette.accentPrimaryBackground.opacity(0.9),
-                                Palette.accentSecondaryBackground.opacity(0.9)
+                                Palette.accentSecondaryBackground.opacity(0.9),
                             ],
                             startPoint: .top,
                             endPoint: .bottom
@@ -59,7 +59,7 @@ struct SettingsView: View {
                         )
                         .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
                     )
-                    // About card
+
                     // About card
                     VStack(alignment: .center, spacing: 14) {
 
@@ -78,10 +78,12 @@ struct SettingsView: View {
                             .font(.system(size: 36, weight: .bold))
                             .foregroundColor(.primary)
 
-                        Text("This application assists users all over the world and provides on-the-go data to help make their day better.")
-                            .font(.system(size: 14))
-                            .foregroundColor(.primary)
-                            .multilineTextAlignment(.center)
+                        Text(
+                            "This app provides fast, on-the-go weather insights powered by the Open-Meteo API. Forecasts may differ slightly from other apps due to different data models, but our goal is to deliver reliable and friendly weather information wherever you are."
+                        )
+                        .font(.system(size: 14))
+                        .foregroundColor(.primary)
+                        .multilineTextAlignment(.leading)
 
                         Text("Made with SwiftUI")
                             .font(.system(size: 14, weight: .semibold))
@@ -93,7 +95,7 @@ struct SettingsView: View {
                         LinearGradient(
                             colors: [
                                 Palette.accentPrimaryBackground.opacity(0.9),
-                                Palette.accentSecondaryBackground.opacity(0.9)
+                                Palette.accentSecondaryBackground.opacity(0.9),
                             ],
                             startPoint: .top,
                             endPoint: .bottom
@@ -108,10 +110,10 @@ struct SettingsView: View {
 
                 }
                 .padding(24)
-                .padding(.top, 72) // leavesspace  so content doesn't sit under the back button
+                .padding(.top, 72)
             }
         }
-        // Pin the back button to the top-left above everything
+        //back button to the top-left above everything
         .overlay(alignment: .topLeading) {
             Button {
                 dismiss()
@@ -119,9 +121,16 @@ struct SettingsView: View {
                 ZStack {
                     Circle()
                         .fill(.ultraThinMaterial)
-                        .overlay(Circle().stroke(.black.opacity(0.25), lineWidth: 1))
+                        .overlay(
+                            Circle().stroke(.black.opacity(0.25), lineWidth: 1)
+                        )
                         .frame(width: 48, height: 48)
-                        .shadow(color: .black.opacity(0.2), radius: 6, x: 0, y: 4)
+                        .shadow(
+                            color: .black.opacity(0.2),
+                            radius: 6,
+                            x: 0,
+                            y: 4
+                        )
 
                     Image(systemName: "chevron.left")
                         .font(.system(size: 22, weight: .bold))
@@ -130,7 +139,7 @@ struct SettingsView: View {
             }
             .buttonStyle(.plain)
             .padding(.leading, 24)
-            .padding(.top, 18) //
+            .padding(.top, 18)
         }
         .tint(Palette.accentPrimary)
         .navigationBarBackButtonHidden(true)
@@ -140,4 +149,3 @@ struct SettingsView: View {
 #Preview {
     NavigationStack { SettingsView() }
 }
-

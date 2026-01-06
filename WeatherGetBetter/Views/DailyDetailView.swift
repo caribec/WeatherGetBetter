@@ -8,104 +8,118 @@
 import SwiftUI
 
 struct DailyDetailView: View {
-    @State private var query = "Houston, TX"
+    // Location this screen should show the 7-day forecast for
+    let cityName: String
+    let latitude: Double
+    let longitude: Double
 
-    // sample rows for the UI
-    private let days: [DayForecast] = [
-        .init(label: "Today", symbol: "sun.max.fill", temp: 75, precip: 0, humidity: 32, wind: 7),
-        .init(label: "Sat",   symbol: "sun.max.fill", temp: 75, precip: 0, humidity: 32, wind: 7),
-        .init(label: "Sun",   symbol: "sun.max.fill", temp: 75, precip: 0, humidity: 32, wind: 7),
-        .init(label: "Mon",   symbol: "sun.max.fill", temp: 75, precip: 0, humidity: 32, wind: 7),
-        .init(label: "Tue",   symbol: "sun.max.fill", temp: 75, precip: 0, humidity: 32, wind: 7),
-    ]
+    // Fetches 7-day forecast data from Open-Meteo
+    @StateObject private var weatherAPI = WeatherAPI()
 
     var body: some View {
         ZStack {
             AppBackground()
-
-            ScrollView {
-                VStack(spacing: 20) {
-
-                    // Title pill
-                    HStack(spacing: 10) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 30, weight: .semibold))
-                            .foregroundColor(.black.opacity(0.85))
-                        Text("5 Day Forecast")
-                            .font(.custom("Helvetica Neue", size: 35))
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 4)
-                    }
-                    .padding(.vertical, 14)
-                    .frame(maxWidth: .infinity)
-
-
-                    // Search + Gear row
- 
-                    HStack(spacing: 12) {
-                        // Non-functional search bar 
-                        HStack(spacing: 8) {
-                            Image(systemName: "mappin.and.ellipse")
-                                .foregroundColor(.red)
-                            Text("Houston")
-                                .foregroundColor(.secondary)
-                            Spacer()
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.black)
-                        }
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 14)
-                        .background(
-                            RoundedRectangle(cornerRadius: 22)
-                                .fill(Color(.systemBackground).opacity(0.9))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 22)
-                                        .stroke(.black.opacity(0.15), lineWidth: 1)
-                                )
-                                .shadow(color: .black.opacity(0.2), radius: 6, y: 4)
-                        )
-                        .padding(.horizontal)
-
-
-
-                        // Gear button styled
-                        NavigationLink(destination: SettingsView()) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.system(size: 22, weight: .bold))
-                                .foregroundColor(.black)
-                                .padding(10)
-                                .background(
-                                    LinearGradient(
-                                        colors: [Palette.accentPrimaryBackground, Palette.accentSecondaryBackground],
-                                        startPoint: .top, endPoint: .bottom
-                                    )
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(.black.opacity(0.25), lineWidth: 1))
-                                    .shadow(color: .black.opacity(0.25), radius: 6, y: 4)
-                                )
-                        }
-                    }
-
-                    // Forecast cards
-                    VStack(spacing: 14) {
-                        ForEach(days) { day in
-                            DayForecastRow(day: day)
-                        }
-                    }
-                    .padding(.top, 4)
-
-                    Spacer(minLength: 24)
-                }
+            
+            content // using content value defined below 
                 .padding(.horizontal, 18)
                 .padding(.top, 18)
                 .padding(.bottom, 24)
+        }
+        .task {
+            //Load 7-day forecast when the view appears
+            await weatherAPI.loadRecords(
+                latitude: latitude,
+                longitude: longitude
+            )
+        }
+        .navigationBarTitleDisplayMode(.inline) //Keeps nav title compact
+    }
+
+    //  Content for different states
+
+    @ViewBuilder
+    private var content: some View {
+        //loading state
+        if weatherAPI.isLoading {
+            VStack(spacing: 16) {
+                ProgressView()
+                Text("Loading 7-day forecast…")
+                    .font(.system(size: 16, weight: .medium))
+            }
+            //error state
+        } else if let error = weatherAPI.errorMessage {
+            VStack(spacing: 12) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 32, weight: .bold))
+                Text("Couldn’t load forecast")
+                    .font(.system(size: 20, weight: .semibold))
+                Text(error)
+                    .font(.system(size: 14))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, 24)
+            //sucess but empty state
+        } else if weatherAPI.dailyForecast.isEmpty {
+            Text("No forecast available.")
+                .font(.system(size: 16, weight: .medium))
+            //yay it works
+        } else {
+            VStack(spacing: 0) {
+                // Fixed header
+                HStack(spacing: 10) {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 50, weight: .semibold))
+                        .foregroundColor(.black.opacity(0.85))
+                        .padding(.bottom, 10)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("7 Day Forecast")
+                            .font(.custom("Helvetica Neue", size: 28))
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+
+                        Text(cityName)
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(.black.opacity(0.75))
+
+                    }
+                    .padding(.bottom, 10)
+
+                    Spacer()
+                }
+                .padding(.vertical, 14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                // divider under header
+                Divider()
+                    .opacity(0.3)
+                    .padding(.bottom, 8)
+
+                // Scrollable rows
+                ScrollView {
+                    VStack(spacing: 14) {
+
+                        ForEach(weatherAPI.dailyForecast) { day in
+                            DayForecastRow(day: day)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            // .padding(.horizontal)
+                        }
+                    }
+                    .padding(.bottom, 24)
+                }
+                .scrollIndicators(.hidden)
             }
         }
+
     }
 }
 
 #Preview {
-    NavigationStack { DailyDetailView() }
+    NavigationStack {
+        DailyDetailView(
+            cityName: "Houston, Tx",
+            latitude: 29.76,
+            longitude: -95.37
+        )
+    }
 }

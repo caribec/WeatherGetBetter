@@ -9,10 +9,10 @@ import Foundation
 
 struct DayForecast: Identifiable, Hashable, Codable {
     let id = UUID()
-    let label: String      // "Today", "Sat", etc.
-    let symbol: String     // SF Symbol name, e.g. "sun.max.fill"
-    let temp: Int          // 75
-    let precip: Int        // percent
-    let humidity: Int      // percent
-    let wind: Int          // mph
+    let label: String  // Today, Sat, etc
+    let symbol: String  // SF Symbol name,  sun.max.fill
+    let temp: Int  // 75
+    let precip: Int  // percent
+    let humidity: Int  // percent
+    let wind: Int  // mph
 }

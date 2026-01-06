@@ -8,5 +8,9 @@
 import Foundation
 
 let sampleCities: [Location] = [
-    Location(cityName: "Houston", stateName: "Texas", countryName: "United States")
+    Location(
+        cityName: "Houston",
+        stateName: "Texas",
+        countryName: "United States"
+    )
 ]
