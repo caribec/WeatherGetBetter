@@ -24,9 +24,6 @@ WeatherGetBetter is an iOS weather application built with **SwiftUI** that provi
   <img src="screenshots/Favorites.png" width="200"/>
 </p>
 
-<p align="center">
-  <img src="screenshots/daily.png" width="200"/>
-  <img src="screenshots/favorites.png" width="200"/>
 </p>
 
 
